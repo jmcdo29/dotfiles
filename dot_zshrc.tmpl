@@ -1,8 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:/home/jay/.local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:{{ .chezmoi.homeDir }}/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/jay/.oh-my-zsh"
+export ZSH="{{ .chezmoi.homeDir }}/.oh-my-zsh"
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -100,7 +100,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 
-export EDITOR='nvim'
+export EDITOR='{{ .editor }}'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -125,8 +125,8 @@ alias projDir="cd ~/Documents/code/projects"
 alias nestDir="cd ~/Documents/code/nest"
 alias nr="node -e 'require(\"repl\").start({ignoreUndefined: true})' --experimental-repl-await"
 alias termz="terminalizer record -k"
-alias code="nvim"
-alias vim=nvim
+alias code="{{ .editor }}"
+alias vim={{ .editor }}
 alias ls="exa"
 alias vdirsyncer="~/vdirsyncer_env/bin/vdirsyncer"
 alias reboot="systemctl reboot"
@@ -144,7 +144,7 @@ eval "$(zoxide init zsh)"
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 
-export PNPM_HOME="/home/jay/.local/share/pnpm"
+export PNPM_HOME="{{ .chezmoi.homeDir }}/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
@@ -158,8 +158,8 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # bun completions
-[ -s "/home/jay/.oh-my-zsh/completions/_bun" ] && source "/home/jay/.oh-my-zsh/completions/_bun"
+[ -s "{{ .chezmoi.homeDir }}/.oh-my-zsh/completions/_bun" ] && source "{{ .chezmoi.homeDir }}/.oh-my-zsh/completions/_bun"
 
 # Bun
-export BUN_INSTALL="/home/jay/.bun"
+export BUN_INSTALL="{{ .chezmoi.homeDir }}/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"

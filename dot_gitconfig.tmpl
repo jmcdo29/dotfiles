@@ -1,10 +1,10 @@
 [user]
-	signingkey = 094726812DEBF5C4
-	email = jmcdo29@gmail.com
+	signingkey = {{ .signingkey }}
+	email = {{ .email }}
 	name = Jay McDoniel
 [core]
 	pager = git-split-diffs --color | less -RFX
-	editor = nvim
+	editor = {{ .editor }}
 [pull]
 	rebase = true
 [init]

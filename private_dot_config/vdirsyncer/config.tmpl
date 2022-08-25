@@ -1,0 +1,35 @@
+[general]
+status_path = "~/.vdirsyncer/status"
+
+[pair calendar_personal]
+a = "calendar_local"
+b = "calendar_google"
+collections = ["from a", "from b"]
+
+[pair calendar_work]
+a = "calendar_local_work"
+b = "calendar_google_work"
+collections = ["from a", "from b"]
+
+[storage calendar_local]
+type = "filesystem"
+path = "~/.calendars/personal"
+fileext = ".ics"
+
+[storage calendar_google]
+type = "google_calendar"
+token_file = "~/.config/vdirsyncer/google/personal_token"
+client_id = "{{ .personalclientid }}"
+client_secret = "{{ .personalclientsecret }}"
+
+
+[storage calendar_local_work]
+type = "filesystem"
+path = "~/.calendars/work"
+fileext = ".ics"
+
+[storage calendar_google_work]
+type = "google_calendar"
+token_file = "~/.config/vdirsyncer/google/work_token"
+client_id = "{{ .personalclientid }}"
+client_secret = "{{ .personalclientsecret }}"
