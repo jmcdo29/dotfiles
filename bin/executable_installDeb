@@ -1,0 +1,7 @@
+#! /bin/sh
+
+file=$1.$(date -Idate).deb
+
+mkdir ~/Downloads/$1
+curl -L $2 -o ~/Downloads/$file
+sudo dpkg -i ~/Downloads/$file

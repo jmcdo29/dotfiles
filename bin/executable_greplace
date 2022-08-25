@@ -1,0 +1,56 @@
+#! /usr/bin/zsh
+
+# Populate colors, for better reporting on what's happening and easier use
+autoload colors && colors
+for COLOR in RED GREEN YELLOW BLUE MAGENTA CYAN BLACK WHITE; do
+    eval $COLOR='$fg_no_bold[${(L)COLOR}]'  #wrap colours between %{ %} to avoid weird gaps in autocomplete
+    eval BOLD_$COLOR='$fg_bold[${(L)COLOR}]'
+done
+eval RESET='$reset_color'
+
+sedFlags="-Ei"
+
+# Search through project for first pattern based on GNU Extended Regex.
+# For the files that have the pattern, pipe the file name over to sed.
+# Inside of sed, replace the first pattern with the second pattern.
+# Will use -i for "in place" if the --dry-run flag was not passed to the command.
+findAndReplace() {
+  grep -rlE "$1" --exclude-dir={node_modules,dist} | xargs sed $sedFlags "s|$1|$2|g";
+}
+
+# Check for what package manager is being used.
+# If --dry-run was passed earlier, fast return as pass.
+# Run grep on the second pattern passed to the CLI and get the related files.
+# Run those files through prettier so that git hooks pass after wards.
+format() {
+  if [ "$sedFlags" = "-E" ]
+  then
+    exit 0;
+  fi
+  pm='';
+  if [[ -f pnpm-lock.yaml ]]
+  then
+    pm=pnpm
+  elif [[ -f yarn.lock ]]
+  then
+    pm=yarn
+  else
+    pm=npx
+  fi
+  grep -rlE $1 --exclude-dir={node_modules,dist} | xargs $pm prettier --write
+}
+
+if [[ -z $1 || -z $2 ]]
+then
+  echo "$RED greplace requires two parameters, a path to look for, and a replacement name to use $RESET";
+  exit 1;
+else
+  if [ "$3" = "--dry-run" ]
+  then
+    sedFlags="-E"
+  fi
+  findAndReplace $1 $2;
+  format $2;
+fi
+
+exit 0;

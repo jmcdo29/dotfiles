@@ -1,0 +1,19 @@
+#! /usr/bin/zsh
+
+RED='\033[0;31m';
+CYAN='\033[0;36m';
+NC='\033[0m';
+
+createFile() {
+  mkdir -p $(dirname $1) && touch $1
+}
+
+if [ -z "$1" ]; then
+  print "${RED}You must specify at least on file to make.${NC}"
+else
+  for i in $*;
+  do
+    createFile $i
+    print "${CYAN}Created $i${NC}"
+  done;
+fi
