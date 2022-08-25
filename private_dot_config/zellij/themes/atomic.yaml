@@ -1,0 +1,13 @@
+themes:
+  atomic:
+    fg: "#000000"
+    bg: "#000000"
+    black: "#A12128"
+    red: "#FF9191"
+    green: "#9ACD68"
+    yellow: "#EDA55D"
+    blue: "#7DBEFF"
+    magenta: "#CB96FF"
+    cyan: "#6ECFCF"
+    white: "#A6B5C5"
+    orange: "#C97016"

@@ -1,0 +1,118 @@
+---
+template:
+  direction: Horizontal
+  parts:
+    - direction: Vertical # part 1
+      borderless: true
+      split_size:
+        Fixed: 1
+      run:
+        plugin:
+          location: "zellij:tab-bar"
+    - direction: Vertical # part 2
+      body: true
+      borderless: true
+    - direction: Vertical # part 3
+      borderless: true
+      split_size:
+        Fixed: 2
+      run:
+        plugin:
+          location: "zellij:status-bar"
+tabs:
+  - name: "btm"
+    run:
+      command: { cmd: btm }
+  - name: "Music"
+    run:
+      command: { cmd: zsh, args: ["-c", "ncmpcpp && zsh"] }
+  - name: "Calendar"
+    run:
+      command:
+        {
+          cmd: zsh,
+          args:
+            [
+              "-c",
+              "ikhal -a home -a Family -a 'D&D' -a birthdays -a work && zsh",
+            ],
+        }
+  - name: "Ogma"
+    direction: Horizontal
+    focus: true
+    parts:
+      - run:
+          command:
+            {
+              cmd: zsh,
+              args: ["-c", "cd ~/Documents/code/projects/ogma && nvim ."],
+            }
+        split_size:
+          Percent: 80
+      - run:
+          command:
+            {
+              cmd: zsh,
+              args: ["-c", "cd ~/Documents/code/projects/ogma && zsh"],
+            }
+  - name: "nest-commander"
+    direction: Horizontal
+    parts:
+      - run:
+          command:
+            {
+              cmd: zsh,
+              args:
+                ["-c", "cd ~/Documents/code/projects/nest-commander && nvim ."],
+            }
+        split_size:
+          Percent: 80
+      - run:
+          command:
+            {
+              cmd: zsh,
+              args:
+                ["-c", "cd ~/Documents/code/projects/nest-commander && zsh"],
+            }
+  - name: "Platypus Code"
+    run:
+      command:
+        {
+          cmd: zsh,
+          args: ["-c", "cd ~/Documents/code/work/gitlab/platypus && nvim ."],
+        }
+  - name: "Playpus Commands"
+    direction: Horizontal
+    parts:
+      - direction: Vertical
+        parts:
+          - run:
+              command:
+                {
+                  cmd: zsh,
+                  args:
+                    ["-c", "cd ~/Documents/code/work/gitlab/platypus && zsh"],
+                }
+          - run:
+              command:
+                {
+                  cmd: zsh,
+                  args:
+                    ["-c", "cd ~/Documents/code/work/gitlab/platypus && zsh"],
+                }
+      - direction: Vertical
+        parts:
+          - run:
+              command:
+                {
+                  cmd: zsh,
+                  args:
+                    ["-c", "cd ~/Documents/code/work/gitlab/platypus && zsh"],
+                }
+          - run:
+              command:
+                {
+                  cmd: zsh,
+                  args:
+                    ["-c", "cd ~/Documents/code/work/gitlab/platypus && zsh"],
+                }

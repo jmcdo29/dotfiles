@@ -1,0 +1,45 @@
+[calendars]
+
+[[home]]
+path = ~/.calendars/personal/jmcdo29@gmail.com/
+type = calendar
+color = "#3809E9"
+
+[[D&D]]
+path = ~/.calendars/personal/0d3n6ntlcnrkvvbcnr165ahm9k@group.calendar.google.com/
+type = calendar
+color = "#13AFAF"
+
+[[Family]]
+path = ~/.calendars/personal/family09023991404869057099@group.calendar.google.com/
+type = calendar
+color = "#5DA713"
+
+[[birthdays]]
+path = ~/.calendars/personal/c5i68sj5edpm4rrfdchm6rreehgm6t3j81jn4rrle0n7cbj3c5m6arj4c5p2sprfdtjmop9ecdnmq@virtual/
+type = calendar
+color = "#C97016"
+
+[[work]]
+path = ~/.calendars/work/jay@trilon.io/
+type = calendar
+color = "#CB96FF"
+
+[[holidays]]
+path = ~/.calendars/work/cln2stbjc4hmgrrcd5i62ua0ctp6utbg5pr2sor1dhimsp31e8n6errfctm6abj3dtmg@virtual/
+type = calendar
+color = "#FF9191"
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M
+firstweekday = 6
+
+[default]
+default_calendar = home
+highlight_event_days = true
+
+[highlight_days]

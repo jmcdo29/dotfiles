@@ -1,0 +1,44 @@
+[Configuration]
+FontName=FiraCode Nerd Font 12
+MiscAlwaysShowTabs=FALSE
+MiscBell=FALSE
+MiscBellUrgent=FALSE
+MiscBordersDefault=TRUE
+MiscCursorBlinks=TRUE
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_IBEAM
+MiscDefaultGeometry=82x24
+MiscInheritGeometry=FALSE
+MiscMenubarDefault=FALSE
+MiscMouseAutohide=FALSE
+MiscMouseWheelZoom=TRUE
+MiscToolbarDefault=FALSE
+MiscConfirmClose=TRUE
+MiscCycleTabs=TRUE
+MiscTabCloseButtons=TRUE
+MiscTabCloseMiddleClick=TRUE
+MiscTabPosition=GTK_POS_TOP
+MiscHighlightUrls=TRUE
+MiscMiddleClickOpensUri=FALSE
+MiscCopyOnSelect=TRUE
+MiscShowRelaunchDialog=TRUE
+MiscRewrapOnResize=TRUE
+MiscUseShiftArrowsToScroll=FALSE
+MiscSlimTabs=TRUE
+MiscNewTabAdjacent=FALSE
+MiscSearchDialogOpacity=100
+MiscShowUnsafePasteDialog=TRUE
+BackgroundMode=TERMINAL_BACKGROUND_IMAGE
+BackgroundImageFile=/home/jay/Pictures/furry/femme_wolf_link.jpg
+TextBlinkMode=TERMINAL_TEXT_BLINK_MODE_FOCUSED
+BackgroundImageStyle=TERMINAL_BACKGROUND_STYLE_SCALED
+ShortcutsNoHelpkey=TRUE
+BindingBackspace=TERMINAL_ERASE_BINDING_ASCII_DELETE
+
+# atmoic theming
+# https://github.com/gerardbm/atomic/blob/master/xfce4-terminal/terminalrc.darkb_s
+ColorCursor=#a6b5c5
+ColorBold=#13afaf
+TabActivityColor=#ec5252
+ColorForeground=#a6b5c5
+ColorBackground=#141a1f
+ColorPalette=#141a1f;#ec5252;#5da713;#c97016;#3890e9;#a359ed;#13afaf;#6b859e;#1a2128;#ff9191;#9acd68;#eda55d;#7dbeff;#cb96ff;#6ecfcf;#a6b5c5

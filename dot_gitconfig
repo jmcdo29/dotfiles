@@ -1,0 +1,13 @@
+[user]
+	signingkey = 094726812DEBF5C4
+	email = jmcdo29@gmail.com
+	name = Jay McDoniel
+[core]
+	pager = git-split-diffs --color | less -RFX
+	editor = nvim
+[pull]
+	rebase = true
+[init]
+	defaultBranch = main
+[push]
+	autoSetupRemote = true
