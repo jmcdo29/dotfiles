@@ -15,7 +15,7 @@ sedFlags="-Ei"
 # Inside of sed, replace the first pattern with the second pattern.
 # Will use -i for "in place" if the --dry-run flag was not passed to the command.
 findAndReplace() {
-  grep -rlE "$1" --exclude-dir={node_modules,dist} | xargs sed $sedFlags "s|$1|$2|g";
+  grep -rlE "$1" --exclude-dir={node_modules,dist} --exclude=tags | xargs sed $sedFlags "s|$1|$2|g";
 }
 
 # Check for what package manager is being used.
@@ -37,7 +37,7 @@ format() {
   else
     pm=npx
   fi
-  grep -rlE $1 --exclude-dir={node_modules,dist} | xargs $pm prettier --write
+  grep -rlE $1 --exclude-dir={node_modules,dist,tags} --exclude=tags | xargs $pm prettier --write
 }
 
 if [[ -z $1 || -z $2 ]]
