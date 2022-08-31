@@ -134,6 +134,8 @@ alias prettyStack='$(fc -ln -1) 2>&1 | sed "s|$(pwd)|~|"'
 alias please='sudo $(fc -ln -1)'
 alias cat='bat -p'
 alias clip='xclip -sel c'
+alias cd="z"
+alias sdv="~/.steam/steam/steamapps/common/Stardew Valley/StardewValley --use-current-shell"
 
 export GPGTTY=$(tty)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
@@ -163,3 +165,5 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 # Bun
 export BUN_INSTALL="{{ .chezmoi.homeDir }}/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+source {{ .chezmoi.homeDir }}/.config/broot/launcher/bash/br
