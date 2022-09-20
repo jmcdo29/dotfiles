@@ -1,0 +1,2 @@
+#! /usr/bin/zsh
+sed -i 's|\(BackgroundImageFile=\).*|\1/home/jay/Pictures/furry/femme_wolf_link.jpg|' ~/.config/xfce4/terminal/terminalrc
