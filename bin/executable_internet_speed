@@ -1,0 +1,3 @@
+#! /bin/sh
+
+speedtest | grep -E '(Down|Up)load' | sed "s/Upload://" | sed "s/Download://" | tr '\n' ' '

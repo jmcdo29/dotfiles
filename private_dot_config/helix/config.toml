@@ -1,0 +1,18 @@
+theme = "tokyonight"
+
+[editor.cursor-shape]
+insert="bar"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+A-F = ":format"
+A-c = ":buffer-close"
+A-C = ":buffer-close!"
+C-left = "move_prev_word_start"
+C-right = "move_next_word_end"
+
+[keys.insert]
+C-left = "move_prev_word_start"
+C-right = "move_next_word_end"
