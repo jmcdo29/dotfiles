@@ -1,0 +1,8 @@
+#! /usr/bin/sh
+
+if [ ! -z $1 ]
+then
+	git diff $* | git-split-diffs --color | less -RFX
+else
+	git diff | git-split-diffs --color | less -RFX
+fi
