@@ -1,0 +1,2 @@
+#!/bin/sh
+/run/current-system/sw/bin/feh --no-fehbg --bg-center '/home/jay/Pictures/wallpaper.jpg' 

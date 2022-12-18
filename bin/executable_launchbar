@@ -1,5 +1,5 @@
-#! /bin/sh
+#! /usr/bin/env zsh
 
-killall -q polybar
+killall -q -r polybar
 
-polybar --config=~/.config/polybar/config.ini -r main
+polybar --config=~/.config/polybar/config.ini -r main 

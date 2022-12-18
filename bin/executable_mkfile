@@ -1,4 +1,4 @@
-#! /usr/bin/zsh
+#! /usr/bin/env zsh
 
 RED='\033[0;31m';
 CYAN='\033[0;36m';

@@ -1,4 +1,4 @@
-#! /usr/bin/zsh
+#! /usr/bin/env zsh
 
 # Populate colors, for better reporting on what's happening and easier use
 autoload colors && colors

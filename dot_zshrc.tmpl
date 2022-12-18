@@ -2,8 +2,8 @@
 #########################################
 #      E N V   V A R I A B L E S        #
 #########################################
-export PATH=$HOME/bin:/usr/local/bin:/home/jay/.local/bin:$PATH
-export ZSH="/home/jay/.oh-my-zsh"
+export PATH=$HOME/bin:/usr/local/bin:{{ .chezmoi.homeDir }}/.local/bin:$PATH
+export ZSH="{{ .chezmoi.homeDir }}/.oh-my-zsh"
 export HISTFILE=~/.zsh_history
 export SAVEHIST=100000
 export HISTSIZE=100000
@@ -18,6 +18,8 @@ export MAGENTA='\x1B[35m'
 export CYAN='\x1B[36m'
 export WHITE='\x1B[37m'
 
+export TERMINAL=kitty
+
 if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
   print -P "%F{33}▓▒░ %F{160}Installing (%F{33}z-shell/zi%F{160})…%f"
   command mkdir -p "$HOME/.zi" && command chmod go-rwX "$HOME/.zi"
@@ -26,6 +28,16 @@ if [[ ! -f $HOME/.zi/bin/zi.zsh ]]; then
     print -P "%F{160}▓▒░ The clone has failed.%f%b"
 fi
 source "$HOME/.zi/bin/zi.zsh"
+pgrep -u "$USER" ssh-agent > /dev/null;
+
+if [[ $? -ne 0 ]]; then
+  ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+fi
+
+if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
+  source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
+fi
+. ~/.keychain/{{ .chezmoi.fqdnHostname }}-sh 2> /dev/null
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 # examples here -> https://wiki.zshell.dev/ecosystem/category/-annexes
@@ -96,8 +108,8 @@ zi snippet OMZP::git
 zi snippet OMZP::node
 zi ice as"completion"
 zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/ripgrep/_ripgrep
-zi light zsh-users/zsh-completions
-zi light zsh-users/zsh-autosuggestions
+zi light zsh-{{ .chezmoi.group }}/zsh-completions
+zi light zsh-{{ .chezmoi.group }}/zsh-autosuggestions
 
 #########################################
 #              H I S T O R Y            #
@@ -167,10 +179,10 @@ export EDITOR='hx'
 #         F U N C T I O N S             #
 #########################################
 ghpr() {
-  GH_FORCE_TTY=100% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window down --header-lines 3
+  GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr view {1}' --preview-window down --header-lines 3
 }
 ghprch() {
-  GH_FORCE_TTY=100% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs gh pr checkout
+  GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs gh pr checkout
 }
 #########################################
 #             A L I A S E S             #
@@ -185,7 +197,7 @@ alias nr="node -e 'require(\"repl\").start({ignoreUndefined: true})' --experimen
 alias termz="terminalizer record -k"
 alias code="hx"
 alias vim=hx
-alias ls="exa"
+# alias ls="exa"
 alias reboot="systemctl reboot"
 alias prettyStack='$(fc -ln -1) 2>&1 | sed "s|$(pwd)|~|"'
 alias please='sudo $(fc -ln -1)'
@@ -205,7 +217,7 @@ eval "$(starship init zsh)"
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 
-export PNPM_HOME="/home/jay/.local/share/pnpm"
+export PNPM_HOME="{{ .chezmoi.homeDir }}/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
@@ -219,11 +231,11 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # bun completions
-[ -s "/home/jay/.oh-my-zsh/completions/_bun" ] && source "/home/jay/.oh-my-zsh/completions/_bun"
+[ -s "{{ .chezmoi.homeDir }}/.oh-my-zsh/completions/_bun" ] && source "{{ .chezmoi.homeDir }}/.oh-my-zsh/completions/_bun"
 
 # Bun
-export BUN_INSTALL="/home/jay/.bun"
+export BUN_INSTALL="{{ .chezmoi.homeDir }}/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-source /home/jay/.config/broot/launcher/bash/br
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source {{ .chezmoi.homeDir }}/.config/broot/launcher/bash/br
+# source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

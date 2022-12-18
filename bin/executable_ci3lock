@@ -1,0 +1,14 @@
+#! /usr/bin/env zsh
+
+dunstclt set-paused true
+
+rm /tmp/screen.png
+
+flameshot full -p /tmp/screen.png
+
+convert -blur 0x4 /tmp/screen.png /tmp/blur.png
+composite -gravity southeast ~/Pictures/gender_fluid_dragons.png /tmp/blur.png /tmp/lock.png
+
+i3lock -i /tmp/lock.png
+
+dunstctl set-paused false

@@ -1,4 +1,4 @@
-#! /usr/bin/zsh
+#! /usr/bin/env zsh
 
 echo 'Mopidy has probably lost authentication with YoutubeMusic'
 printf 'To fix this, run \x1B[34msudo mopidyctl ytmusic reauth\x1B[0m\n'

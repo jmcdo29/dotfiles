@@ -3,9 +3,9 @@
 	email = jmcdo29@gmail.com
 	name = Jay McDoniel
 [core]
-#	pager = git-split-diffs --color | less -RFX
+	pager = delta
 	editor = hx
-	excludesfile = /home/jay/.gitignore_global
+	excludesfile = {{ .chezmoi.homeDir }}/.gitignore_global
 [pull]
 	rebase = true
 [init]
@@ -14,3 +14,19 @@
 	autoSetupRemote = true
 [commit]
 	gpgsign = true
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[delta]
+    features = decorations
+
+[delta "interactive"]
+    keep-plus-minus-markers = false
+
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
