@@ -1,0 +1,16 @@
+#! /usr/bin/env sh
+
+FFPROFILE=$(cat .mozilla/firefox/profiles.ini | grep Path= | sed 's/Path=//g')
+
+if [ ! -d ~/.mozilla/firefox/$FFPROFILE/chrome ];
+then
+  mkdir ~/.mozilla/firefox/$FFPROFILE/chrome
+fi
+
+echo '#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
+  opacity: 0;
+  pointer-events: none;
+}
+#main-window:not([tabsintitlebar="true"]) #TabsToolbar {
+    visibility: collapse !important;
+}' > ~/.mozilla/firefox/$FFPROFILE/chrome/userChrome.css

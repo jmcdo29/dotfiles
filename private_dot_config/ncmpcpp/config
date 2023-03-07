@@ -101,7 +101,7 @@ visualizer_data_source = localhost:5555
 #
 visualizer_look = ♪♯
 #
-visualizer_color = blue, cyan, green, yellow, magenta, red
+visualizer_color = blue, cyan, red, magenta, blue, cyan, red, magenta
 #
 ## Alternative subset of 256 colors for terminals that support it.
 ##
@@ -315,7 +315,7 @@ song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)
 ## Note: Custom command that will be executed each time song changes. Useful for
 ## notifications etc.
 ##
-execute_on_song_change = "polybar-msg action '#ncmpcpp.hook.0'"
+execute_on_song_change = "polybar-msg action '#ncmpcpp.hook.0' > /dev/null"
 #
 ##
 ## Note: Custom command that will be executed each time player state
@@ -354,7 +354,7 @@ execute_on_song_change = "polybar-msg action '#ncmpcpp.hook.0'"
 #
 #volume_change_step = 2
 #
-#autocenter_mode = no
+autocenter_mode = yes
 #
 #centered_cursor = no
 #
@@ -401,11 +401,11 @@ execute_on_song_change = "polybar-msg action '#ncmpcpp.hook.0'"
 #
 #cyclic_scrolling = no
 #
-#lyrics_fetchers = azlyrics, genius, musixmatch, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
+lyrics_fetchers = musixmatch, azlyrics, genius, sing365, metrolyrics, justsomelyrics, jahlyrics, plyrics, tekstowo, zeneszoveg, internet
 #
-#follow_now_playing_lyrics = no
+follow_now_playing_lyrics = yes
 #
-#fetch_lyrics_for_current_song_in_background = no
+fetch_lyrics_for_current_song_in_background = yes
 #
 #store_lyrics_in_song_dir = no
 #
@@ -493,7 +493,7 @@ execute_on_song_change = "polybar-msg action '#ncmpcpp.hook.0'"
 ## Note: if below is enabled, ncmpcpp will ignore leading "The" word while
 ## sorting items in browser, tags in media library, etc.
 ##
-#ignore_leading_the = no
+ignore_leading_the = yes
 #
 ##
 ## Note: if below is enabled, ncmpcpp will ignore diacritics while searching and
@@ -536,7 +536,7 @@ execute_on_song_change = "polybar-msg action '#ncmpcpp.hook.0'"
 #
 #search_engine_default_search_mode = 1
 #
-#external_editor = nano
+external_editor = hx
 #
 ## Note: set to yes if external editor is a console application.
 ##
@@ -584,7 +584,7 @@ state_line_color = default
 #
 state_flags_color = default:b
 #
-main_window_color = yellow
+main_window_color = blue
 #
 color1 = white
 #

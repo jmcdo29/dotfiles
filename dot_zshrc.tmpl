@@ -17,6 +17,7 @@ export BLUE='\x1B[34m'
 export MAGENTA='\x1B[35m'
 export CYAN='\x1B[36m'
 export WHITE='\x1B[37m'
+export GST_PLUGIN_SYSTEM_PATH_1_0=/nix/store/n2s3aj8zmar85b8155gnvq5l3nrfcdp5-gstreamer-1.20.3/lib/gstreamer-1.0/
 
 export TERMINAL=kitty
 
@@ -31,7 +32,7 @@ source "$HOME/.zi/bin/zi.zsh"
 pgrep -u "$USER" ssh-agent > /dev/null;
 
 if [[ $? -ne 0 ]]; then
-  ssh-agent -t 1h > "$XDG_RUNTIME_DIR/ssh-agent.env"
+  ssh-agent > "$XDG_RUNTIME_DIR/ssh-agent.env"
 fi
 
 if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
@@ -210,9 +211,14 @@ alias icat="kitty +kitten icat"
 #   P L U G I N S   &   T O O L S       #
 #########################################
 export GPGTTY=$(tty)
+if [[ $(keychain -l | grep -q 256) -ne 0 ]];
+then
+  setupKeychain;
+fi
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
+eval "$(direnv hook zsh)"
 
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin

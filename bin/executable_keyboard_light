@@ -1,0 +1,2 @@
+#! /usr/bin/env sh
+xbacklight -ctrl asus::kbd_backlight -set  $1

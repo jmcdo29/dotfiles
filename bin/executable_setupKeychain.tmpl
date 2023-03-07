@@ -1,0 +1,29 @@
+#! /usr/bin/env zsh
+
+passFile={{ .chezmoi.homeDir }}/bin/ssh_pass
+
+BW_CLIENTID={{ bw.user }} BW_CLIENTSECRET={{ bw.secret }} bw login --apikey --quiet
+
+bwSession="$(bw unlock --raw)"
+
+setPassFile() {
+  cat > $passFile << EOF
+#! /usr/bin/env sh
+echo '$(bw get notes $1 --session $bwSession --raw)'
+EOF
+  cat $passFile
+  eval $(cat $passFile)
+  chmod u+x $passFile
+}
+
+setPassFile {{ bw.github_ssh }}
+
+SSH_ASKPASS=$passFile keychain --eval --agents ssh id_github
+
+setPassFile {{ bw.gitlab_ssh }}
+
+SSH_ASKPASS=$passFile keychain --eval --agents ssh id_gitlab
+
+# rm $passFile
+
+bw logout

@@ -21,3 +21,8 @@ auto-format = true
 name = "typescript"
 formatter = { command = 'prettier', args = ["--parser", "typescript"] }
 auto-format = true
+
+[[language]]
+name = "vue"
+formatter = { command = 'prettier', args = ["--parser", ""] }
+language-server = { command = "vls" }
