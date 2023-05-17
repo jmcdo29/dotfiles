@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 format = """
 $username\
 $hostname\
@@ -16,47 +18,25 @@ $git_status\
 $hg_branch\
 $docker_context\
 $package\
-$cmake\
-$cobol\
 $container\
 $dart\
 $deno\
-$dotnet\
-$elixir\
-$elm\
-$erlang\
 $golang\
 $helm\
 $java\
-$julia\
 $kotlin\
 $lua\
-$nim\
 $nodejs\
-$ocaml\
 $perl\
-$php\
 $pulumi\
-$purescript\
 $python\
-$rlang\
-$red\
 $ruby\
 $rust\
-$scala\
-$swift\
-$terraform\
-$vlang\
-$vagrant\
-$zig\
-$nix_shell\
-$conda\
 $memory_usage\
 $aws\
 $openstack\
 $azure\
 $env_var\
-$crystal\
 ${custom.typescript}\
 $custom\
 $sudo\
@@ -70,41 +50,33 @@ $shell\
 $character
 """
 
-command_timeout = 1000
+command_timeout = 3000
 
 [git_status]
 conflicted = "  "
 untracked = " "
 stashed = " "
-modified = " "
+modified = " "
 staged = '[++\($count\)](green)'
 renamed = " "
-deleted = "🗑 "
-ahead = " ⇡${count}"
-diverged = "😵⇡${ahead_count}⇣${behind_count}"
+deleted = "󰩹 "
+ahead = " ⇡${count}"
+diverged = "⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
 style = "bold cyan"
 
 [aws]
 symbol = "  "
 
-[conda]
-symbol = " "
-
 [dart]
 symbol = " "
 
 [directory]
-read_only = " "
+read_only = ""
+home_symbol = "󰋜"
 
 [docker_context]
 symbol = " "
-
-[elixir]
-symbol = " "
-
-[elm]
-symbol = " "
 
 [git_branch]
 symbol = " "
@@ -118,30 +90,15 @@ symbol = " "
 [java]
 symbol = " "
 
-[julia]
-symbol = " "
-
 [memory_usage]
 symbol = " "
-
-[nim]
-symbol = " "
-
-[nix_shell]
-symbol = " "
 
 [nodejs]
 symbol = " "
 style = "bold green"
 
 [package]
-symbol = " "
-
-[perl]
-symbol = " "
-
-[php]
-symbol = " "
+symbol = " "
 
 [python]
 symbol = " "
@@ -152,14 +109,13 @@ symbol = "  "
 [rust]
 symbol = " "
 
-[scala]
-symbol = " "
-
 [shlvl]
 symbol = " "
 
-[swift]
-symbol = "ﯣ "
+[character]
+success_symbol = "[](bold green)"
+error_symbol = "[](bold red)"
+vimcmd_symbol = "[](bold purple)"
 
 [custom.typescript]
 command = "echo "

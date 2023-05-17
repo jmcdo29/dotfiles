@@ -1,10 +1,17 @@
 #! /usr/bin/env sh
 
-FFPROFILE=$(cat .mozilla/firefox/profiles.ini | grep Path= | sed 's/Path=//g')
+FFPROFILE=$(cat .mozilla/firefox/profiles.ini | grep Path= | sed 's/Path=//g' | tr '\n' ' ' | sed -E 's/\s.*//g')
+echo $FFPROFILE
 
-if [ ! -d ~/.mozilla/firefox/$FFPROFILE/chrome ];
+whoami
+
+CHROMEDIR="~/.mozilla/firefox/$FFPROFILE/chrome"
+echo $CHROMEDIR
+ls -l $CHROMEDIR
+
+if [ ! -d "$CHROMEDIR" ];
 then
-  mkdir ~/.mozilla/firefox/$FFPROFILE/chrome
+  mkdir "$CHROMEDIR"
 fi
 
 echo '#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsToolbar > .toolbar-items {
@@ -13,4 +20,4 @@ echo '#main-window[tabsintitlebar="true"]:not([extradragspace="true"]) #TabsTool
 }
 #main-window:not([tabsintitlebar="true"]) #TabsToolbar {
     visibility: collapse !important;
-}' > ~/.mozilla/firefox/$FFPROFILE/chrome/userChrome.css
+}' > "$CHROMEDIR/userChrome.css"

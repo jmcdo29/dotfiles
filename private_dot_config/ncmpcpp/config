@@ -101,7 +101,7 @@ visualizer_data_source = localhost:5555
 #
 visualizer_look = ♪♯
 #
-visualizer_color = blue, cyan, red, magenta, blue, cyan, red, magenta
+visualizer_color = blue, 233, magenta, 255, 212, blue, 233, magenta, 255, 212
 #
 ## Alternative subset of 256 colors for terminals that support it.
 ##
@@ -237,7 +237,7 @@ song_list_format = {%a - }{%t}|{$8%f$9}$R{$3%l$9}
 #
 #alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
 #
-current_item_prefix = $(yellow)$r
+current_item_prefix = $(magenta)$r
 #
 #current_item_suffix = $/r$(end)
 #

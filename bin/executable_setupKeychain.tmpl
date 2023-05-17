@@ -2,7 +2,7 @@
 
 passFile={{ .chezmoi.homeDir }}/bin/ssh_pass
 
-BW_CLIENTID={{ bw.user }} BW_CLIENTSECRET={{ bw.secret }} bw login --apikey --quiet
+BW_CLIENTID={{ .bwuser }} BW_CLIENTSECRET={{ .bwsecret }} bw login --apikey --quiet
 
 bwSession="$(bw unlock --raw)"
 
@@ -16,11 +16,11 @@ EOF
   chmod u+x $passFile
 }
 
-setPassFile {{ bw.github_ssh }}
+setPassFile {{ .bwgithub_ssh }}
 
 SSH_ASKPASS=$passFile keychain --eval --agents ssh id_github
 
-setPassFile {{ bw.gitlab_ssh }}
+setPassFile {{ .bwgitlab_ssh }}
 
 SSH_ASKPASS=$passFile keychain --eval --agents ssh id_gitlab
 

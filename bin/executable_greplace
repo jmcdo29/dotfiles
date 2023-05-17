@@ -13,7 +13,8 @@ sedFlags="-Ei"
 # Search through project for first pattern based on GNU Extended Regex.
 # For the files that have the pattern, pipe the file name over to sed.
 # Inside of sed, replace the first pattern with the second pattern.
-# Will use -i for "in place" if the --dry-run flag was not passed to the command.
+# Will use -i for "in place" if the --dry-run flag was not passed to the command
+
 findAndReplace() {
   grep -rlE "$1" --exclude-dir={node_modules,dist} --exclude=tags | xargs sed $sedFlags "s|$1|$2|g";
 }
