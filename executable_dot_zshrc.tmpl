@@ -2,8 +2,8 @@
 #########################################
 #      E N V   V A R I A B L E S        #
 #########################################
-export PATH=$HOME/bin:/usr/local/bin:{{ .chezmoi.homeDir }}/.local/bin:$PATH
-export ZSH="{{ .chezmoi.homeDir }}/.oh-my-zsh"
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/go/bin:$PATH
+export ZSH="/home/jay/.oh-my-zsh"
 export HISTFILE=~/.zsh_history
 export SAVEHIST=100000
 export HISTSIZE=100000
@@ -17,7 +17,9 @@ export BLUE='\x1B[34m'
 export MAGENTA='\x1B[35m'
 export CYAN='\x1B[36m'
 export WHITE='\x1B[37m'
-export GST_PLUGIN_SYSTEM_PATH_1_0=/nix/store/n2s3aj8zmar85b8155gnvq5l3nrfcdp5-gstreamer-1.20.3/lib/gstreamer-1.0/
+export ZSH_CACHE_DIR=/home/jay/.cache/zi
+export NNN_FIFO=/tmp/nnn.fifo
+export NNN_PLUG="p:preview-tui"
 
 export TERMINAL=kitty
 
@@ -38,7 +40,7 @@ fi
 if [[ ! -f "$SSH_AUTH_SOCK" ]]; then
   source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
-. ~/.keychain/{{ .chezmoi.fqdnHostname }}-sh 2> /dev/null
+. ~/.keychain/Jay - Arch-sh 2> /dev/null
 autoload -Uz _zi
 (( ${+_comps} )) && _comps[zi]=_zi
 # examples here -> https://wiki.zshell.dev/ecosystem/category/-annexes
@@ -109,8 +111,10 @@ zi snippet OMZP::git
 zi snippet OMZP::node
 zi ice as"completion"
 zi snippet https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/ripgrep/_ripgrep
-zi light zsh-{{ .chezmoi.group }}/zsh-completions
-zi light zsh-{{ .chezmoi.group }}/zsh-autosuggestions
+zi light zsh-users/zsh-completions
+zi light zsh-users/zsh-autosuggestions
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
 
 #########################################
 #              H I S T O R Y            #
@@ -173,6 +177,7 @@ bindkey "^[[1;5D" backward-word
 bindkey '^[[1;3C' forward-word                          
 bindkey '^[[1;3D' backward-word
 bindkey '^ ' autosuggest-accept
+bindkey -v
 
 export EDITOR='hx'
 
@@ -180,14 +185,15 @@ export EDITOR='hx'
 #         F U N C T I O N S             #
 #########################################
 ghpr() {
-  GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr view {1}' --preview-window down --header-lines 3
+  GH_FORCE_TTY=1000% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY=1000% gh pr view {1}' --preview-window down --header-lines 3
 }
 ghprch() {
-  GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY={{ .chezmoi.gid }}% gh pr view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs gh pr checkout
+  GH_FORCE_TTY=1000% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY=1000% gh pr view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs gh pr checkout
 }
 #########################################
 #             A L I A S E S             #
 #########################################
+# alias hx="helix"
 alias zshconfig="code ~/.zshrc"
 alias pnpmInst="curl -L https://pnpm.js.org/pnpm.js | node - add --global pnpm"
 alias workDir="cd ~/Documents/code/work"
@@ -198,7 +204,7 @@ alias nr="node -e 'require(\"repl\").start({ignoreUndefined: true})' --experimen
 alias termz="terminalizer record -k"
 alias code="hx"
 alias vim=hx
-# alias ls="exa"
+alias ls="exa"
 alias reboot="systemctl reboot"
 alias prettyStack='$(fc -ln -1) 2>&1 | sed "s|$(pwd)|~|"'
 alias please='sudo $(fc -ln -1)'
@@ -206,24 +212,35 @@ alias cat='bat -p'
 alias clip='xclip -sel c'
 alias sdv="~/.steam/steam/steamapps/common/Stardew\ Valley/StardewValley --use-current-shell"
 alias icat="kitty +kitten icat"
+alias gogh='bash -c "$(wget -qO- https://git.io/vQgMr)"'
+alias yay="paru"
+alias ll="ls-go -aSki"
+alias lls="xplr"
+alias lsi="nnn -P p"
+alias :q="exit"
+alias NE="2>/dev/null"
+alias px="pnpx"
+alias pn="pnpm"
+alias nest="pnpx @nestjs/cli"
+alias ulid="node -e 'console.log(require(\"ulid\").ulid())'"
 
 #########################################
 #   P L U G I N S   &   T O O L S       #
 #########################################
 export GPGTTY=$(tty)
-if [[ $(keychain -l | grep -q 256) -ne 0 ]];
-then
-  setupKeychain;
-fi
+# if [[ $(keychain -l | grep -q 256) -ne 0 ]];
+# then
+#   setupKeychain;
+# fi
+eval $(keychain --eval --quiet ~/.ssh/id_github);
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 eval "$(starship init zsh)"
-eval "$(direnv hook zsh)"
 
 # add Pulumi to the PATH
 export PATH=$PATH:$HOME/.pulumi/bin
 
-export PNPM_HOME="{{ .chezmoi.homeDir }}/.local/share/pnpm"
+export PNPM_HOME="/home/jay/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
@@ -237,11 +254,20 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 
 # bun completions
-[ -s "{{ .chezmoi.homeDir }}/.oh-my-zsh/completions/_bun" ] && source "{{ .chezmoi.homeDir }}/.oh-my-zsh/completions/_bun"
+[ -s "/home/jay/.oh-my-zsh/completions/_bun" ] && source "/home/jay/.oh-my-zsh/completions/_bun"
+[ -s "/usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh" ] && source /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 
 # Bun
-export BUN_INSTALL="{{ .chezmoi.homeDir }}/.bun"
+export BUN_INSTALL="/home/jay/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# source {{ .chezmoi.homeDir }}/.config/broot/launcher/bash/br
+# source /home/jay/.config/broot/launcher/bash/br
 # source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# pnpm
+export PNPM_HOME="/home/jay/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
